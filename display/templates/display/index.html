@@ -1,0 +1,92 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>Email Visualization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon/favicon.ico' %}"/>
+
+    <style>
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'img/background.png' %}");
+
+            height: 100%;
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-text {
+            text-align: left;
+            color: white;
+            padding-left: 18%;
+            padding-top: 2%;
+        }
+
+        .hero-text a {
+            font-size: 16px;
+            color: #19865C;
+            transition: 0.3s;
+        }
+
+        .myCatalog a {
+            padding: 4px 4px 4px 0;
+            font-size: 16px;
+            display: block;
+            color: #19865C;
+            transition: 0.3s;
+        }
+
+        .myMore a {
+            padding: 4px 4px 4px 0;
+            font-size: 16px;
+            display: block;
+            color: #19865C;
+            transition: 0.3s;
+        }
+
+        .hero-text h1 {
+            padding-left: 0;
+            margin-bottom: 8px;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .hero-text a:hover {
+            color: #f1f1f1;
+        }
+
+        .hero-text p {
+            text-align: justify;
+            width: 80%;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+<div class="hero-image">
+    <div class="hero-text">
+        <h1 style="font-size: 40px; color:white">Welcome</h1>       
+        <div class="myCatalog" style="float:left;">
+            <h1>Catalog</h1>
+            <a href="employee-analysis.html" title="email count and time frequency">Employee Analysis I</a>
+            <a href="employee-analysis-2.html" title="relations and comparasion">Employee Analysis II</a>
+            <a href="email-analysis.html" title="domain count">Email Analysis I</a>
+            <a href="email-analysis-2.html" title="category classification">Email Analysis II</a>
+            <a href="business-analysis.html" title="number against time">Business Analysis I</a>
+            <a href="business-analysis-2.html" title="hot and new keywords cloud">Business Analysis II</a>
+            <a href="word-cloud.html" title="hot and new keywords cloud">Word Cloud</a>
+            <a href="business-analysis-3.html" title="keywords heat map over time ">Business Analysis III</a>
+        </div>        
+    </div>
+</div>
+</body>
+</html>
