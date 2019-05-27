@@ -1,7 +1,7 @@
 # CSE256-Final-Project
 CSE256 Final Project
 
-## Postive & Negative
+## Positive & Negative
 ### Resources
 
 Cached data and trained classifier
