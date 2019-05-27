@@ -27,3 +27,31 @@ Playground for writting the py scripts that get triggered when user submit a req
 6. 'trigram': 出现次数最多的1000个Trigram
 
 **TODO**: 单词难度分类
+
+### hyper_parameters.json
+>参数调试,包括Vectorizer,Ngram,min_df,max_df (lowercase都是false比较好,结果没有放进来)
+
+格式如下:
+```
+{
+    "Vectorizer": "Count",
+    "lowercase": "False",
+    "ngram": {          //调试变量
+        "ngram": {
+            "1": "0.928214732",
+            "2": "0.941635456",
+            "3": "0.944132335",
+            "4": "0.940699126",
+            "5": "0.938826467",
+            "6": "0.937578027",
+            "7": "0.937265918",
+            "8": "0.936017478",
+            "9": "0.935393258"
+        },
+        "min": "1", //其余参数取值
+        "max": "1110"
+        },
+   ... ...
+}
+```
+        
