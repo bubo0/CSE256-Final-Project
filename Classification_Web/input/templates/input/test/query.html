@@ -419,13 +419,13 @@
                                     <div class="card-body">
                                         <!-- <div class="ct-pie-chart"></div> -->
 
-                                        <form action="/input/" method="post" id="input-form">
-                                            {% csrf_token %}
-                                            {{ form }}
+                                        <form id="input-form">
+                                            <input type="text" name="inputText">
                                             <input type="submit" value="Submit">
                                         </form>
 
                                         <img src="/static/trump.jpeg" alt="insert image test" width="200" height="120">
+                                        <div class='result'></div>
                                     </div>
                                 </div>
                             </div>
@@ -1066,6 +1066,32 @@
         <script src="/static/templates/assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
         <!-- scripit init-->
     <script src="/static/templates/assets/js/dashboard2.js"></script>
+    <script>
+        function getFormData($form){
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+            $.map(unindexed_array, function(n, i){
+                indexed_array[n['name']] = n['value'];
+            });
+            return indexed_array;
+        }
+
+        $('#input-form').submit(function(e) {
+            var $form = $(this);
+            var formData = getFormData($form);
+            $.ajax({
+                url: 'ajax/classify',
+                data: formData,
+                success: function (data) {
+                    $('.result').load(data)
+                },
+                error: function (data) {
+                    alert('failed')
+                }
+            });
+            return false;
+        })
+    </script>
     </body>
 
 </html>
