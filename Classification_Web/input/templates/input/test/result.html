@@ -37088,25 +37088,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divXRRXQER5GHQJC1F"></div>
+        <div class="lime top_div" id="top_divU2RC4N0ETRCRIKA"></div>
         
         <script>
-        var top_div = d3.select('#top_divXRRXQER5GHQJC1F').classed('lime top_div', true);
+        var top_div = d3.select('#top_divU2RC4N0ETRCRIKA').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.9887921915715102, 0.011207808428489749]);
+            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.004858162454292603, 0.9951418375457074]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["terrible", 0.6300440302462753], ["is", -0.36752434897381764], ["this", -0.16137687174635246]], 0, exp_div);
+                exp.show([["great", 0.8184639865306739], ["america", -0.0555820003762364], ["make", -0.012648272758489659], ["again", 0.0020280525741781263]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_text([["terrible", 8, 0.6300440302462753], ["is", 5, -0.36752434897381764], ["this", 0, -0.16137687174635246]], 0, "this is terrible", raw_div, true);
+            exp.show_raw_text([["great", 13, 0.8184639865306739], ["america", 5, -0.0555820003762364], ["make", 0, -0.012648272758489659], ["again", 19, 0.0020280525741781263]], 1, "make america great again", raw_div, true);
             
         </script>
         </body></html>
