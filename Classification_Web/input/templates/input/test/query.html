@@ -425,7 +425,8 @@
                                         </form>
 
                                         <img src="/static/trump.jpeg" alt="insert image test" width="200" height="120">
-                                        <div class='result'></div>
+                                        <div class='text_result'></div>
+                                        <div class='table_result'></div>
                                     </div>
                                 </div>
                             </div>
@@ -1083,7 +1084,12 @@
                 url: 'ajax/classify',
                 data: formData,
                 success: function (data) {
-                    $('.result').load(data)
+                    text_url=data['text']
+                    table_url=data['table']
+                    $('.text_result').load(text_url)
+                    $('.table_result').load(table_url)
+                    $("#input-form-card").css({height: 'auto'});
+                    $("#input-form-card-div").css({height: 'auto'});
                 },
                 error: function (data) {
                     alert('failed')
