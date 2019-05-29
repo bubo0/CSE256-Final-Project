@@ -9,6 +9,8 @@ import pickle
 from .forms import NameForm
 import os
 from django.conf import settings
+from django.shortcuts import render_to_response
+import re
 
 def query(request):
     str_list=[]
@@ -23,6 +25,19 @@ def query(request):
     # return render(request, 'input/query.html', context)
     return render(request, 'input/test/query.html', context)
 
+def result(request):
+    str_list=[]
+    initial='a'
+    form=NameForm()
+    context = {
+        'str_list': str_list,
+        'initial': initial,
+        'form': form,
+    }
+    # return HttpResponse(template.render(context, request))
+    # return render(request, 'input/query.html', context)
+    return render(request, 'input/test/result.html', context)
+
 def classify(request):
     print('==============================classify is called')
     searchText=request.GET['inputText']
@@ -34,11 +49,12 @@ def classify(request):
     pipe=grid_search.best_estimator_
     text_exp = text_explainer.explain_instance(searchText, pipe.predict_proba,
                                  num_features=10,top_labels=1)
-    #TODO
-    #1 .Save the explainer output as a html
-    #2. Correctly return a url mapping to the right html
-    text_exp.save_to_file('result.html')
-    return HttpResponse('query')
+    s=text_exp.as_html()
+    s=re.sub(r'{{','',s)
+    file= open("input/templates/input/test/result.html","w")
+    file.write(s)
+    file.close()
+    return HttpResponse('result')
 
 def index(request):
     return render(request, 'input/test/index.html')
