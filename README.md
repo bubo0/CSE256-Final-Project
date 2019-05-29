@@ -20,25 +20,33 @@ Playground for writting the py scripts that get triggered when user submit a req
 ### dataset_statistic.json
 >数据集的相关分析,包括
 1. 'count': 数据量 (total, Trump, not Trump, validation)
-2. 'length': text长度 (向上取整10)
+2. 'length': text长度列表
 3. 'source': 数据来源 (账号: 数量)
-4. 'unigram': 出现次数最多的1000个单词
-5. 'bigram': 出现次数最多的1000个Bigram
-6. 'trigram': 出现次数最多的1000个Trigram
+4. 'unigram': 出现次数最多的10个单词和最少的10个单词
+5. 'bigram': 出现次数最多的10个Bigram和最少的10个Bigram
+6. 'trigram': 出现次数最多的10个Trigram和最少的10个Trigram
 
 **TODO**: 单词难度分类
 
-### hyper_parameters.json
+### performance.json
 >参数调试,包括Vectorizer,Ngram,min_df,max_df (lowercase都是false比较好,结果没有放进来)
+
+最佳模型的score
 
 格式如下:
 ```
 {
-    "Vectorizer": "Count",
-    "lowercase": "False",
-    "ngram": {          //调试变量
-        "ngram": {
-            "1": "0.928214732",
+    {
+        "Vectorizer": "Count",
+        "lowercase": "False",
+        "score": { //最佳模型score
+            "accuracy": 0.9441323345817728,
+            "recall": 0.9411388355726168,
+            "precision": 0.9441591784338896,
+            "f1": 0.9426465876321692
+        },
+        "ngram": { //调试变量
+            "1": "0.928214732", //对应performance
             "2": "0.941635456",
             "3": "0.944132335",
             "4": "0.940699126",
@@ -47,10 +55,9 @@ Playground for writting the py scripts that get triggered when user submit a req
             "7": "0.937265918",
             "8": "0.936017478",
             "9": "0.935393258"
-        },
-        "min": "1", //其余参数取值
-        "max": "1110"
-        },
+        },       
+        ... ... 
+    },
    ... ...
 }
 ```
