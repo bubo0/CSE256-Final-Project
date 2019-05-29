@@ -34,4 +34,7 @@ def query(request):
         }
         # return HttpResponse(template.render(context, request))
         # return render(request, 'input/query.html', context)
-        return render(request, 'input/test/index.html', context)
+        return render(request, 'input/test/query.html', context)
+
+def index(request):
+    return render(request, 'input/test/index.html')
