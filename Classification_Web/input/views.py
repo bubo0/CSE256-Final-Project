@@ -33,4 +33,5 @@ def query(request):
             'form': form,
         }
         # return HttpResponse(template.render(context, request))
-        return render(request, 'input/query.html', context)
+        # return render(request, 'input/query.html', context)
+        return render(request, 'input/test/index.html', context)
