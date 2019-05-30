@@ -29,18 +29,18 @@ def query(request):
     }
     # return HttpResponse(template.render(context, request))
     # return render(request, 'input/query.html', context)
-    return render(request, 'input/test/query.html', context)
+    return render(request, 'input/query.html', context)
 
 def text(request):
-    return render(request,'input/test/text.html')
+    return render(request,'input/text.html')
 
 def table(request):
-    return render(request, 'input/test/table.html')
+    return render(request, 'input/table.html')
 
 def exp_clean_save(exp,path,file):
     s=exp.as_html()
     s=re.sub(r'{{','',s)
-    file= open(path+'/'+file+'.html','w')
+    file= open(path+'/'+file+'.html','w', encoding="utf-8")
     file.write(s)
     file.close()
 
@@ -49,7 +49,7 @@ def classify_text(searchText):
     text_explainer=LimeTextExplainer(class_names=pipe.classes_,verbose=True)
     text_exp = text_explainer.explain_instance(searchText, pipe.predict_proba,
                                  num_features=10,top_labels=1)
-    path='input/templates/input/test'
+    path='input/templates/input'
     filename='text'
     exp_clean_save(text_exp,path,filename)
     return filename
@@ -59,7 +59,7 @@ def classify_table(searchText):
     text_explainer=LimeTextExplainer(class_names=pipe.classes_,verbose=True)
     text_exp = text_explainer.explain_instance(searchText, pipe.predict_proba,
                                  num_features=10,top_labels=1)
-    path='input/templates/input/test'
+    path='input/templates/input'
     filename='table'
     exp_clean_save(text_exp,path,filename)
     return filename
@@ -84,4 +84,4 @@ def classify(request):
     return JsonResponse({'text': text_url, 'table': table_url})
 
 def index(request):
-    return render(request, 'input/test/index.html')
+    return render(request, 'input/index.html')
