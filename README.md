@@ -26,7 +26,19 @@ Playground for writting the py scripts that get triggered when user submit a req
 5. 'bigram': 出现次数最多的10个Bigram和最少的10个Bigram
 6. 'trigram': 出现次数最多的10个Trigram和最少的10个Trigram
 
-**TODO**: 单词难度分类
+### words_level.json
+Tweets使用单词级别统计,格式如下
+```
+{
+    "realDonaldTrump": {
+        "TOEFL": 0.3483347680749494,
+        "others": 0.176213288315986,
+        "primary": 0.4286085614945163,
+        "GRE": 0.04684338211454828
+    },
+    ... ...
+}
+```
 
 ### performance.json
 >参数调试,包括Vectorizer,Ngram,min_df,max_df (lowercase都是false比较好,结果没有放进来)
@@ -61,4 +73,17 @@ Playground for writting the py scripts that get triggered when user submit a req
    ... ...
 }
 ```
-        
+### example_instances.json
+most confident true positive/negative 和 most overconfident false postive/negative 的10个例子
+```
+{
+    "true Trump": {
+        "JimRenacci has worked so hard on Tax Reductions Illegal Immigration the Border and Crime.": [
+            1.4794265146278462e-08,
+            0.9999999852057349
+        ],
+        ... ...
+    }
+    ... ...
+}
+```
