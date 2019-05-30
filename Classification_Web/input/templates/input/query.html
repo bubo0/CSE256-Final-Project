@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NLP classification</title>
+    
+    <link rel="stylesheet" type="text/css" href="/static/templates/query.css">
+  </head>
+  <body>
+
+    <h1>Hello World!!</h1>
+    {% if initial %}
+    {% for text in initial %}
+    <p>{{ text }}</p>
+    {% endfor %}
+
+    {% endif %}
+
+    {% if str_list %}
+        {% for text in str_list %}
+        <p>{{ text }}</p>
+        {% endfor %}
+
+    {% endif %}
+
+    <form action="/input/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
+
