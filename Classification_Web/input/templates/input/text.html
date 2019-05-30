@@ -24808,8 +24808,8 @@
 	     * // }
 	     *
 	     * // Use custom template delimiters.
-	     * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-	     * var compiled = _.template('hello {{ user }}!');
+	     * _.templateSettings.interpolate = /([\s\S]+?)}}/g;
+	     * var compiled = _.template('hello  user }}!');
 	     * compiled({ 'user': 'mustache' });
 	     * // => 'hello mustache!'
 	     *
@@ -37088,10 +37088,10 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_div4HHH4LK7NFU55VZ"></div>
+        <div class="lime top_div" id="top_divXQHEOOHJ8MX5E9I"></div>
         
         <script>
-        var top_div = d3.select('#top_div4HHH4LK7NFU55VZ').classed('lime top_div', true);
+        var top_div = d3.select('#top_divXQHEOOHJ8MX5E9I').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
@@ -37103,10 +37103,10 @@
             var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["a", -2.3493240885870453e-31]], 0, exp_div);
+                exp.show([["123", -6.062771841514956e-32]], 0, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_text([["a", 0, -2.3493240885870453e-31]], 0, "a", raw_div, true);
+            exp.show_raw_text([["123", 0, -6.062771841514956e-32]], 0, "123", raw_div, true);
             
         </script>
         </body></html>
