@@ -1080,7 +1080,7 @@
             var indexed_array = {};
             $.map(unindexed_array, function (n, i) {
                 indexed_array[n['name']] = n['value'];
-            });
+            });            
             return indexed_array;
         }
 
@@ -1088,7 +1088,7 @@
             var $form = $(this);
             var formData = getFormData($form);
             $.ajax({
-                url: 'ajax/classify1',                
+                url: 'ajax/classify2',                
                 data: formData,
                 success: function (data) {                    
                     text_url = data['text']

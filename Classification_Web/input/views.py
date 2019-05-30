@@ -65,8 +65,7 @@ def classify_table(searchText):
     return filename
 
 
-def classify(request):
-    print('==============================classify is called')
+def classify(request, classify_pk = 1):            
     global text_model, table_model, train_data
     if not text_model:
         print('initializing sentiment text model')
@@ -83,5 +82,8 @@ def classify(request):
     table_url=classify_table(searchText)
     return JsonResponse({'text': text_url, 'table': table_url})
 
-def index(request):
-    return render(request, 'input/test/index.html')
+def index(request, index_pk = 1):
+    if index_pk == 1:
+        return render(request, 'input/test/index.html')
+    else:
+        return render(request, 'input/test/index2.html')
