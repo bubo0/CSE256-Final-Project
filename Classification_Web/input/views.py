@@ -84,4 +84,12 @@ def classify(request):
     return JsonResponse({'text': text_url, 'table': table_url})
 
 def index(request):
-    return render(request, 'input/index.html')
+    str_list=[]
+    initial='a'
+    form=NameForm()
+    context = {
+        'str_list': str_list,
+        'initial': initial,
+        'form': form,
+    }            
+    return render(request, 'input/index.html', context)
