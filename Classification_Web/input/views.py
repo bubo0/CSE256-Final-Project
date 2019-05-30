@@ -40,7 +40,7 @@ def table(request):
 def exp_clean_save(exp,path,file):
     s=exp.as_html()
     s=re.sub(r'{{','',s)
-    file= open(path+'/'+file+'.html','w')
+    file= open(path+'/'+file+'.html','w', encoding='utf-8')
     file.write(s)
     file.close()
 
