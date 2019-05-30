@@ -37088,25 +37088,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divVI5Q6HJL8AF9Y1V"></div>
+        <div class="lime top_div" id="top_divKSU56JQWAYKZT5F"></div>
         
         <script>
-        var top_div = d3.select('#top_divVI5Q6HJL8AF9Y1V').classed('lime top_div', true);
+        var top_div = d3.select('#top_divKSU56JQWAYKZT5F').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.43668257848750547, 0.5633174215124945]);
+            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.03966643456588627, 0.9603335654341137]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["is", 0.20610537095046105], ["this", -0.1336301499929097], ["good", 0.002969819172433076]], 1, exp_div);
+                exp.show([["with my boyfriend > 0.00", 0.12143112363912034], ["went > 0.00", -0.1106030822783271], ["time with my > 0.00", 0.08597227446984192], ["night > 0.00", 0.08464603149573457], ["went last night > 0.00", 0.08329410136649316], ["last night for > 0.00", 0.07251735294865994], ["first time with > 0.00", 0.06126191441299095], ["my boyfriend > 0.00", 0.05937889289928135], ["my > 0.03", 0.05912099080341611], ["boyfriend > 0.00", 0.04829662126025091]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_text([["is", 5, 0.20610537095046105], ["this", 0, -0.1336301499929097], ["good", 8, 0.002969819172433076]], 1, "this is good", raw_div, true);
-            
+            exp.show_raw_tabular([["with my boyfriend", "0.29", 0.12143112363912034], ["went", "0.12", -0.1106030822783271], ["time with my", "0.26", 0.08597227446984192], ["night", "0.14", 0.08464603149573457], ["went last night", "0.27", 0.08329410136649316], ["last night for", "0.26", 0.07251735294865994], ["first time with", "0.27", 0.06126191441299095], ["my boyfriend", "0.20", 0.05937889289928135], ["my", "0.07", 0.05912099080341611], ["boyfriend", "0.19", 0.04829662126025091]], 1, raw_div);
+        
         </script>
         </body></html>

@@ -37088,25 +37088,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divEZK4E04B0V183ZF"></div>
+        <div class="lime top_div" id="top_div6Y0U2Z4J2ZCMCFU"></div>
         
         <script>
-        var top_div = d3.select('#top_divEZK4E04B0V183ZF').classed('lime top_div', true);
+        var top_div = d3.select('#top_div6Y0U2Z4J2ZCMCFU').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.0007069324737482008, 0.9992930675262518]);
+            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.039666434565886255, 0.9603335654341137]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["is", 0.37516666128777704], ["good", 0.318014154086901], ["this", 0.12216765011820734]], 1, exp_div);
+                exp.show([["Went", -0.24674910741034595], ["my", 0.22945428259537962], ["night", 0.22465649932908843], ["with", 0.16930755271708947], ["boyfriend", 0.1630263821510516], ["time", 0.10658482956922412], ["first", 0.08370356929790601], ["the", -0.07385641865729388], ["for", 0.054729631019017955], ["last", 0.008818493396691164]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_text([["is", 5, 0.37516666128777704], ["good", 8, 0.318014154086901], ["this", 0, 0.12216765011820734]], 1, "this is good", raw_div, true);
+            exp.show_raw_text([["Went", 0, -0.24674910741034595], ["my", 40, 0.22945428259537962], ["night", 10, 0.22465649932908843], ["with", 35, 0.16930755271708947], ["boyfriend", 43, 0.1630263821510516], ["time", 30, 0.10658482956922412], ["first", 24, 0.08370356929790601], ["the", 20, -0.07385641865729388], ["for", 16, 0.054729631019017955], ["last", 5, 0.008818493396691164]], 1, "Went last night for the first time with my boyfriend", raw_div, true);
             
         </script>
         </body></html>

@@ -3,19 +3,19 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 # from django.http import HttpResponseRedirect
 from django.template import loader
+from django.urls import resolve
 import dill
 from lime.lime_text import LimeTextExplainer
 import pickle
 from .forms import NameForm
-import os
-from django.conf import settings
-from django.shortcuts import render_to_response
 import re
 from lime.lime_tabular import LimeTabularExplainer
 from lime.lime_text import LimeTextExplainer
+import numpy as np
 
-text_model=None
-table_model=None
+model_loaded=False
+data_loaded=False
+model=None
 train_data=None
 
 def query(request):
@@ -31,11 +31,9 @@ def query(request):
     # return render(request, 'input/query.html', context)
     return render(request, 'input/test/query.html', context)
 
-def text(request):
-    return render(request,'input/test/text.html')
-
-def table(request):
-    return render(request, 'input/test/table.html')
+def lime(request):
+    current_url = resolve(request.path_info).url_name
+    return render(request,'input/test/'+current_url+'.html')
 
 def exp_clean_save(exp,path,file):
     s=exp.as_html()
@@ -45,37 +43,52 @@ def exp_clean_save(exp,path,file):
     file.close()
 
 def classify_text(searchText):
-    pipe=text_model.best_estimator_
-    text_explainer=LimeTextExplainer(class_names=pipe.classes_,verbose=True)
-    text_exp = text_explainer.explain_instance(searchText, pipe.predict_proba,
+    pipe=model.best_estimator_
+    explainer=LimeTextExplainer(class_names=pipe.classes_,verbose=False)
+    exp = explainer.explain_instance(searchText, pipe.predict_proba,
                                  num_features=10,top_labels=1)
     path='input/templates/input/test'
     filename='text'
-    exp_clean_save(text_exp,path,filename)
+    exp_clean_save(exp,path,filename)
     return filename
 
 def classify_table(searchText):
-    pipe=table_model.best_estimator_
-    text_explainer=LimeTextExplainer(class_names=pipe.classes_,verbose=True)
-    text_exp = text_explainer.explain_instance(searchText, pipe.predict_proba,
-                                 num_features=10,top_labels=1)
+    vect=model.best_estimator_.named_steps.vect
+    tfidf=model.best_estimator_.named_steps.tfidf
+    clf=model.best_estimator_.named_steps.clf
+    
+    searchTextTrans=tfidf.transform(vect.transform([searchText])).toarray()[0]
+    idx=np.argwhere(searchTextTrans!=0).flatten()
+    searchTextTrans=searchTextTrans[idx]
+    train=train_data[:,idx]
+    features=[vect.get_feature_names()[i] for i in idx]
+    explainer=LimeTabularExplainer(train,class_names=clf.classes_,feature_names=features,verbose=False)
+    def predict_proba(X):
+        w=clf.coef_[0][idx]
+        po=np.dot(X,w)+clf.intercept_[0]
+        p=1/(1+np.exp(po))
+        ret=zip(p,1-p)
+        return np.array(list(ret))
+    exp=explainer.explain_instance(searchTextTrans,predict_proba,num_features=10, top_labels=1)
     path='input/templates/input/test'
     filename='table'
-    exp_clean_save(text_exp,path,filename)
+    exp_clean_save(exp,path,filename)
     return filename
 
-
-def classify(request, classify_pk = 1):            
-    global text_model, table_model, train_data
-    if not text_model:
+def classify(request, classify_pk = 1):
+    global model, train_data
+    global model_loaded, data_loaded
+    if not model_loaded:
         print('initializing sentiment text model')
-        text_model=pickle.load(open('input/sentiment_text.model', 'rb'))
-    if not table_model:
-        print('initializing sentiment table model')
-        table_model=pickle.load(open('input/sentiment_table.model', 'rb'))
-    if not train_data:
+        model=pickle.load(open('input/sentiment_text.model', 'rb'))
+        model_loaded=True
+    if not data_loaded:
         print('initializing sentiment training data')
-        train_data=pickle.load(open('input/sentiment_train.data', 'rb'))
+        data=pickle.load(open('input/sentiment_train.data', 'rb'))
+        vect=model.best_estimator_.named_steps.vect
+        tfidf=model.best_estimator_.named_steps.tfidf
+        train_data=tfidf.transform(vect.transform(data)).toarray()
+        data_loaded=True
 
     searchText=request.GET['inputText']
     text_url=classify_text(searchText)
