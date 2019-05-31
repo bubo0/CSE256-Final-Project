@@ -37088,25 +37088,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_div8CORWK5T7VOWL8U"></div>
+        <div class="lime top_div" id="top_divG7JUYHEL964D13Y"></div>
         
         <script>
-        var top_div = d3.select('#top_div8CORWK5T7VOWL8U').classed('lime top_div', true);
+        var top_div = d3.select('#top_divG7JUYHEL964D13Y').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.00396443407356728, 0.9960355659264327]);
+            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.9650662633404903, 0.03493373665950971]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["happy", 0.05835206065056969], ["and", 0.04944253322421364], ["am", 0.0332172481074065], ["you", 0.032053211171066354], ["i", 0.0024639681624571697]], 1, exp_div);
+                exp.show([["told", 0.1267990244035567], ["be", 0.10232752319156721], ["NO", 0.0945468180248488], ["to", 0.0820665967587501], ["had", 0.08095711396290234], ["NICE", -0.07975882132379469], ["he", -0.06984745040804595], ["named", 0.06088386150702571], ["day", -0.059931000946141615], ["12", 0.05976736925317105]], 0, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_text([["happy", 5, 0.05835206065056969], ["and", 11, 0.04944253322421364], ["am", 2, 0.0332172481074065], ["you", 15, 0.032053211171066354], ["i", 0, 0.0024639681624571697]], 1, "i am happy and you ", raw_div, true);
+            exp.show_raw_text([["told", 178, 0.1267990244035567], ["be", 91, 0.10232752319156721], ["NO", 187, 0.0945468180248488], ["to", 21, 0.0820665967587501], ["to", 88, 0.0820665967587501], ["had", 128, 0.08095711396290234], ["NICE", 265, -0.07975882132379469], ["he", 204, -0.06984745040804595], ["named", 94, 0.06088386150702571], ["named", 211, 0.06088386150702571], ["day", 200, -0.059931000946141615], ["12", 166, 0.05976736925317105]], 0, " Robert Mueller came to the Oval Office (along with other potential candidates) seeking to be named the Director of the FBI. He had already been in that position for 12 years, I told him NO. The next day he was named Special Counsel - A total Conflict of Interest. NICE! ", raw_div, true);
             
         </script>
         </body></html>

@@ -57,7 +57,9 @@ def classify_table(searchText):
     tfidf=model.best_estimator_.named_steps.tfidf
     clf=model.best_estimator_.named_steps.clf
     
-    searchTextTrans=tfidf.transform(vect.transform([searchText])).toarray()[0]
+    searchTextTrans=vect.transform([searchText])
+    if tfidf.get_params()['use_idf']: searchTextTrans=tfidf.transform(searchTextTrans)
+    searchTextTrans=searchTextTrans.toarray()[0]
     idx=np.argwhere(searchTextTrans!=0).flatten()
     searchTextTrans=searchTextTrans[idx]
     train=train_data[:,idx]
