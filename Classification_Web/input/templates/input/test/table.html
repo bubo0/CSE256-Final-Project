@@ -37088,25 +37088,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divL7Y7LNNQL075W6J"></div>
+        <div class="lime top_div" id="top_divMQMN69EJOZTM0G5"></div>
         
         <script>
-        var top_div = d3.select('#top_divL7Y7LNNQL075W6J').classed('lime top_div', true);
+        var top_div = d3.select('#top_divMQMN69EJOZTM0G5').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.9650662633404903, 0.03493373665950972]);
+            var pp = new lime.PredictProba(pp_svg, ["NoTrump", "Trump"], [0.7208987030887197, 0.27910129691128027]);
             
         
         var exp_div;
-            var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
+            var exp = new lime.Explanation(["NoTrump", "Trump"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["he > 0.00", -0.10568483172877739], ["he had > 0.00", 0.10439384205712847], ["nice > 0.00", -0.0961135302097036], ["no > 0.00", 0.09349798773232061], ["told > 0.00", 0.09153814981540244], ["to be > 0.00", 0.08156284966540908], ["be > 0.00", 0.05926557540134163], ["came to the > 0.00", -0.049324005269222815], ["with other > 0.00", 0.01662055321109622], ["12 years > 0.00", 0.016620553211096217]], 0, exp_div);
+                exp.show([["Donald Trump > 0.00", 0.1434302988298362], ["I love > 0.00", -0.10104744730046976], ["Donald > 0.00", 0.05105461022589663], ["love > 0.00", -0.014584985671236231]], 0, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["he", "0.20", -0.10568483172877739], ["he had", "0.16", 0.10439384205712847], ["nice", "0.09", -0.0961135302097036], ["no", "0.09", 0.09349798773232061], ["told", "0.11", 0.09153814981540244], ["to be", "0.09", 0.08156284966540908], ["be", "0.07", 0.05926557540134163], ["came to the", "0.19", -0.049324005269222815], ["with other", "0.18", 0.01662055321109622], ["12 years", "0.19", 0.016620553211096217]], 0, raw_div);
+            exp.show_raw_tabular([["Donald Trump", "1.00", 0.1434302988298362], ["I love", "1.00", -0.10104744730046976], ["Donald", "1.00", 0.05105461022589663], ["love", "1.00", -0.014584985671236231]], 0, raw_div);
         
         </script>
         </body></html>
