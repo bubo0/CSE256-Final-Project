@@ -1117,7 +1117,13 @@
                         $('.table_div tr:last').attr( "style", 'color: black; font-size: 15px')
 
                     })                    
-                    $("#main").css({ height: 'auto' });                    
+                    $("#main").css({ height: 'auto' });      
+
+
+                    // TODO add space between two clssification result
+                    // div class = "text_result", "table_result"
+                    $('.text_result').attr( "style", 'margin-bottom: 5%')
+                    $('.table_result').attr( "style", 'margin-bottom: 2%')            
                 },
                 error: function (data) {
                     alert('failed')
