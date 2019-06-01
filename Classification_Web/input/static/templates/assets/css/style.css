@@ -4509,3 +4509,35 @@ h6.h1 {
     display: inline-block !important;
   }
 }
+@media (min-width: 992px) {
+  #main-content .col-lg-10 {      
+      flex: 0 0 100%;
+      max-width: 100%;      
+  }
+}
+
+@media (min-width: 576px) {
+ .bootstrap-data-table-panel .col-sm-5 {    
+    flex: 0 0 61.666667%;
+    max-width: 61.666667%;
+ }
+}
+
+@media (min-width: 576px) {
+ .bootstrap-data-table-panel .col-sm-7 {        
+    flex: 0 0 37.333333%;
+    max-width: 37.333333%;
+ }
+}
+
+.bootstrap-data-table-panel .row {        
+  width: 100%;
+}
+
+.bootstrap-data-table-panel .pagination{        
+  float:right;
+}
+
+.bootstrap-data-table-panel li{        
+  padding: 5px;  
+}

@@ -59,7 +59,7 @@ def classify_text(searchText, classify_pk):
     exp_clean_save(exp,path,filename)
     return filename
 
-def classify_table(searchText, classify_pk):
+def classify_table(searchText, classify_pk):    
     if classify_pk == 1:
         vect=sen_model.best_estimator_.named_steps.vect
         tfidf=sen_model.best_estimator_.named_steps.tfidf
@@ -87,8 +87,8 @@ def classify_table(searchText, classify_pk):
     features=[vect.get_feature_names()[i] for i in idx]
     explainer=LimeTabularExplainer(train,class_names=clf.classes_,feature_names=features,verbose=False)
     def predict_proba(X):
-        w=clf.coef_[0][idx]
-        po=np.dot(X,w)+clf.intercept_[0]
+        w=clf.coef_[0][idx]        
+        po=np.dot(X,w)+clf.intercept_[0]        
         p=1/(1+np.exp(po))
         ret=zip(p,1-p)
         return np.array(list(ret))
@@ -120,8 +120,7 @@ def classify(request, classify_pk = 1):
             trump_text_loaded=True
         if not trump_table_loaded:
             print('initializing Trump trainning data')
-            trump_table = pickle.load(open('input/trump_table.pickle', 'rb'))
-            print(trump_table)
+            trump_table = pickle.load(open('input/trump_table.pickle', 'rb'))            
             trump_table_loaded=True
 
     searchText=request.GET['inputText']
