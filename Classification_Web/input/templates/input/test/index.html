@@ -1103,13 +1103,19 @@
                         $('.table_div tr').each(function( index ) {
                             $( this ).append('<td>'+table_weight[index]+'</td>')
                         });
-                        css_val=$('.table_div tr').last().attr('style')
-                        console.log(css_val)
-                        var lastTr = $('<tr></tr>').appendTo(".table_div table");
-                        lastTr.append('<td>INTERCEPT</td>')
-                        lastTr.append('<td>'+table_intercept+'</td>')
-                        lastTr.append('<td>1</td>')
-                        console.log(lastTr.html())
+                        css_val=$('.table_div tr').first().attr('style')
+                        // console.log(css_val)
+                        // var lastTr = $('<tr></tr>')
+                        // lastTr.append('<td>INTERCEPT</td>')
+                        // lastTr.append('<td>'+table_intercept+'</td>')
+                        // lastTr.append('<td>1</td>')
+
+                        // test_tr = $( ".table_div tr:nth-child(2)" )
+                        // console.log(test_tr)
+                        // $( ".table_div table" ).prepend(test_tr)
+                        $('.table_div tr:last').after('<tr><td>INTERCEPT</td><td>'+table_intercept+'</td><td>1</td></tr>')
+                        $('.table_div tr:last').attr( "style", 'color: black; font-size: 15px')
+
                     })                    
                     $("#main").css({ height: 'auto' });                    
                 },

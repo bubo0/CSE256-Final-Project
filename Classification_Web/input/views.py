@@ -77,8 +77,11 @@ def classify_table(searchText, classify_pk):
     searchTextTrans=searchTextTrans[idx]
     train=train_data[:,idx]
     weights=clf.coef_[0][idx]
+    weights = np.round(weights, decimals=2)
+
     intercept=clf.intercept_[0]
-    print(weights)
+    intercept = np.round(intercept, decimals=2)
+
     if classify_pk == 2:
         train = train.toarray()
     features=[vect.get_feature_names()[i] for i in idx]
