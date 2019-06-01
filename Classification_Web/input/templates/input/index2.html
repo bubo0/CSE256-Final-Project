@@ -404,7 +404,7 @@
                 var cells = target.getElementsByTagName("td");                
                 data = cells[0].innerHTML;           
             }
-            var formData = {'inputText': data}
+            var formData = {'inputText': data, 'fromTable': true}            
             showLime(formData)
             return false;
         })
