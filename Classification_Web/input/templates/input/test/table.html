@@ -37088,25 +37088,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divAF3VKW71SMGME94"></div>
+        <div class="lime top_div" id="top_divWDVWMRFG3UMJAOZ"></div>
         
         <script>
-        var top_div = d3.select('#top_divAF3VKW71SMGME94').classed('lime top_div', true);
+        var top_div = d3.select('#top_divWDVWMRFG3UMJAOZ').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["NoTrump", "Trump"], [0.076022105131432, 0.923977894868568]);
+            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.0007069324737481783, 0.9992930675262518]);
             
         
         var exp_div;
-            var exp = new lime.Explanation(["NoTrump", "Trump"]);
+            var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["Border > 0.00", 0.4311655744164519], ["many > 0.00", 0.16526747619187973], ["Southern > 0.00", 0.1212581934980895], ["country > 0.00", -0.09319517812476907], ["Southern Border > 0.00", 0.08591250944687934], ["through > 0.00", -0.07912410797473414], ["through their > 0.00", -0.050547538212286455], ["Mexico > 0.00", 0.04870199574698443], ["country and > 0.00", -0.04089350034056695], ["for many > 0.00", 0.019127196844816164]], 1, exp_div);
+                exp.show([["this is good > 0.00", 0.14666666543982626], ["good > 0.00", 0.14349503202477426], ["this is > 0.00", 0.1417160603032992], ["is > 0.03", 0.09852662124808716], ["is good > 0.00", 0.008605279057970268], ["this > 0.03", -0.004502104311456401]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["Border", "1.00", 0.4311655744164519], ["many", "1.00", 0.16526747619187973], ["Southern", "1.00", 0.1212581934980895], ["country", "1.00", -0.09319517812476907], ["Southern Border", "1.00", 0.08591250944687934], ["through", "1.00", -0.07912410797473414], ["through their", "1.00", -0.050547538212286455], ["Mexico", "1.00", 0.04870199574698443], ["country and", "1.00", -0.04089350034056695], ["for many", "1.00", 0.019127196844816164]], 1, raw_div);
+            exp.show_raw_tabular([["this is good", "0.72", 0.14666666543982626], ["good", "0.25", 0.14349503202477426], ["this is", "0.33", 0.1417160603032992], ["is", "0.18", 0.09852662124808716], ["is good", "0.50", 0.008605279057970268], ["this", "0.17", -0.004502104311456401]], 1, raw_div);
         
         </script>
         </body></html>
