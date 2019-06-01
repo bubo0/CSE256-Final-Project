@@ -76,14 +76,16 @@ def classify_table(searchText, classify_pk):
     idx=np.argwhere(searchTextTrans!=0).flatten()
     searchTextTrans=searchTextTrans[idx]
     train=train_data[:,idx]
+    weights=clf.coef_[0][idx]
+    intercept=clf.intercept_[0]
+    print(weights)
     if classify_pk == 2:
         train = train.toarray()
     features=[vect.get_feature_names()[i] for i in idx]
     explainer=LimeTabularExplainer(train,class_names=clf.classes_,feature_names=features,verbose=False)
     def predict_proba(X):
         w=clf.coef_[0][idx]        
-        po=np.dot(X,w)+clf.intercept_[0]
-        print(clf.intercept_[0])
+        po=np.dot(X,w)+clf.intercept_[0]        
         p=1/(1+np.exp(po))
         ret=zip(p,1-p)
         return np.array(list(ret))
@@ -91,7 +93,7 @@ def classify_table(searchText, classify_pk):
     path='input/templates/input/test'
     filename='table'
     exp_clean_save(exp,path,filename)
-    return filename
+    return filename, weights.tolist(), intercept
 
 def classify(request, classify_pk = 1):
     global sen_model, sen_train_data, trump_text, trump_table
@@ -115,14 +117,13 @@ def classify(request, classify_pk = 1):
             trump_text_loaded=True
         if not trump_table_loaded:
             print('initializing Trump trainning data')
-            trump_table = pickle.load(open('input/trump_table.pickle', 'rb'))
-            print(trump_table)
+            trump_table = pickle.load(open('input/trump_table.pickle', 'rb'))            
             trump_table_loaded=True
 
     searchText=request.GET['inputText']
-    text_url=classify_text(searchText, classify_pk)
-    table_url=classify_table(searchText, classify_pk)
-    return JsonResponse({'text': text_url, 'table': table_url})
+    text_url =classify_text(searchText, classify_pk)
+    table_url, table_weight, table_intercept =classify_table(searchText, classify_pk)
+    return JsonResponse({'text': text_url, 'table': table_url, 'table_weight': table_weight, 'table_intercept': table_intercept})
 
 def index(request, index_pk = 1):
     template = str(request.build_absolute_uri('?')).split('/')[-1]
