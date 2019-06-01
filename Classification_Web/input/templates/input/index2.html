@@ -37,7 +37,7 @@
         <div class="nano">
             <div class="nano-content">
                 <ul>
-                    <div class="logo"><a href="index">
+                    <div class="logo"><a href="#">
                             <!-- <img src="/static/templates/assets/images/logo.png" alt="" /> --><span>Team 3</span></a>
                     </div>
                     <li class="label">Main</li>
@@ -71,9 +71,8 @@
                 </div>
                 <div class="col-lg-11">
                     <form id="input-form">
-                        <div class="input-group input-group-rounded">
-                
-                            <input type="text" placeholder="" name="inputText" class="form-control">
+                        <div class="input-group input-group-rounded">                
+                            <input type="text" placeholder="" name="inputText" class="form-control" id="searchText" atuocomplete="on">
                             <span class="input-group-btn"><button class="btn btn-primary btn-group-right" type="submit" value="Submit"
                                     style=" height: 42px; width: 42px"><i class="ti-search"></i></button> </span>
                         </div>
@@ -406,6 +405,7 @@
             }
             var formData = {'inputText': data, 'fromTable': true}            
             showLime(formData)
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
             return false;
         })
         function getFormData($form) {
@@ -424,10 +424,28 @@
                 success: function (data) {                    
                     text_url = data['text']
                     table_url = data['table']
-                    $("#main_content").empty()
+                    table_weight = data['table_weight']
+                    table_intercept = data['table_intercept']
+                    table_weight.unshift('Weight')           
                     $('.text_result').load(text_url)
-                    $('.table_result').load(table_url)                    
-                    $("#main").css({ height: 'auto' });                    
+                    $('.table_result').load(table_url, function() {
+                        $('.table_div tr').each(function( index ) {
+                            $( this ).append('<td>'+table_weight[index]+'</td>')
+                        });
+                        $('.table_div tr:first td').each(function(index) {
+                            if (index == 0)
+                                $( this ).attr('style', 'width: 50%')
+                            else
+                                $( this ).attr('style', 'width: 25%')
+                        });                        
+                        $('.table_div tr:last').after('<tr><td>INTERCEPT</td><td>'+table_intercept+'</td><td>1</td></tr>')
+                        $('.table_div tr:last').attr( "style", 'color: black; font-size: 15px')
+
+                    })                    
+                    $("#main").css({ height: 'auto' }); 
+                    $('.text_result').attr( "style", 'margin-bottom: 5%')
+                    $('.table_result').attr( "style", 'margin-bottom: 2%')
+                    $('#searchText').val('')                
                 },
                 error: function (data) {
                     alert('failed')
@@ -438,7 +456,7 @@
         $('#input-form').submit(function (e) {            
             var $form = $(this);
             var formData = getFormData($form);
-            showLime(formData)
+            showLime(formData)            
             return false;
         })
     </script>

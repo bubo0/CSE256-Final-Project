@@ -55,16 +55,21 @@ def classify_text(searchText, classify_pk):
     return filename
 
 
-def loadExamples(classify_pk):    
-    global trump_examples
+def loadExamples(classify_pk):
+    global trump_examples, sen_examples
     if classify_pk == 1:
-        pass
+        sen_examples = set()
+        types = ['tp', 'tn', 'fp', 'fn']
+        for t in types:
+            for e in pickle.load(open("../Sentiment/" + t + ".pickple", "rb")):
+                sen_examples.add(e[0])
+        sen_examples_loaded = True
     else:
-        trump_examples = set()        
-        for _, sentences in json.loads(open("input/trump_examples.json").read()).items(): 
+        trump_examples = set()
+        for _, sentences in json.loads(open("../Trump/example_instances.json").read()).items():
             for sent, _ in sentences.items():
                 trump_examples.add(sent)
-        trump_examples_loaded = True        
+        trump_examples_loaded = True
 
 
 def classify_table(searchText, classify_pk):
@@ -117,14 +122,19 @@ def classify(request, classify_pk=1):
     global sen_examples, trump_examples, sen_examples_loaded, trump_examples_loaded
     searchText = request.GET['inputText']
     if 'fromTable' in request.GET:
+        searchText = searchText[10:]
+        if classify_pk == 1:
+            if not sen_examples_loaded:
+                loadExamples(classify_pk)
+            examples = sen_examples
         if classify_pk == 2:
-            if not trump_examples_loaded:            
-                loadExamples(classify_pk)            
-            searchText = searchText[:-3]
-            for example in trump_examples:
-                if searchText in example:
-                    searchText = example
-                    break                    
+            if not trump_examples_loaded:
+                loadExamples(classify_pk)
+            examples = trump_examples
+        for example in examples:
+            if searchText in example:
+                searchText = example
+                break
     if classify_pk == 1:
         if not sen_model_loaded:
             print('initializing sentiment text model')
@@ -146,7 +156,7 @@ def classify(request, classify_pk=1):
             print('initializing Trump trainning data')
             trump_table = pickle.load(open('input/trump_table.pickle', 'rb'))
             trump_table_loaded = True
-    
+
     text_url = classify_text(searchText, classify_pk)
     table_url, table_weight, table_intercept = classify_table(
         searchText, classify_pk)
