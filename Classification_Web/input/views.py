@@ -33,11 +33,11 @@ def query(request):
     }
     # return HttpResponse(template.render(context, request))
     # return render(request, 'input/query.html', context)
-    return render(request, 'input/test/query.html', context)
+    return render(request, 'input/query.html', context)
 
 def lime(request):
     current_url = resolve(request.path_info).url_name
-    return render(request,'input/test/'+current_url+'.html')
+    return render(request,'input/'+current_url+'.html')
 
 def exp_clean_save(exp,path,file):
     s=exp.as_html()
@@ -54,7 +54,7 @@ def classify_text(searchText, classify_pk):
     explainer=LimeTextExplainer(class_names=pipe.classes_,verbose=False)
     exp = explainer.explain_instance(searchText, pipe.predict_proba,
                                  num_features=10,top_labels=1)
-    path='input/templates/input/test'
+    path='input/templates/input'
     filename='text'
     exp_clean_save(exp,path,filename)
     return filename
@@ -93,7 +93,7 @@ def classify_table(searchText, classify_pk):
         ret=zip(p,1-p)
         return np.array(list(ret))
     exp=explainer.explain_instance(searchTextTrans,predict_proba,num_features=10, top_labels=1)
-    path='input/templates/input/test'
+    path='input/templates/input'
     filename='table'
     exp_clean_save(exp,path,filename)
     return filename, weights.tolist(), intercept
@@ -131,8 +131,8 @@ def classify(request, classify_pk = 1):
 def index(request, index_pk = 1):
     template = str(request.build_absolute_uri('?')).split('/')[-1]
     if template.endswith('html'):
-        return render(request, 'input/test/' + template)
+        return render(request, 'input/' + template)
     if index_pk == 1:
-        return render(request, 'input/test/index.html')
+        return render(request, 'input/index.html')
     else:
-        return render(request, 'input/test/index2.html')
+        return render(request, 'input/index2.html')
