@@ -2,3 +2,5 @@
 *.DS_Store
 table.html
 text.html
+.vscode/
+env/
