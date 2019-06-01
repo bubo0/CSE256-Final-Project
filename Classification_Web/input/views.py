@@ -76,6 +76,9 @@ def classify_table(searchText, classify_pk):
     idx=np.argwhere(searchTextTrans!=0).flatten()
     searchTextTrans=searchTextTrans[idx]
     train=train_data[:,idx]
+    weights=clf.coef_[0][idx]
+    intercept=clf.intercept_[0]
+    print(weights)
     if classify_pk == 2:
         train = train.toarray()
     features=[vect.get_feature_names()[i] for i in idx]
@@ -90,7 +93,7 @@ def classify_table(searchText, classify_pk):
     path='input/templates/input/test'
     filename='table'
     exp_clean_save(exp,path,filename)
-    return filename
+    return filename, weights.tolist(), intercept
 
 def classify(request, classify_pk = 1):
     global sen_model, sen_train_data, trump_text, trump_table
@@ -119,9 +122,9 @@ def classify(request, classify_pk = 1):
             trump_table_loaded=True
 
     searchText=request.GET['inputText']
-    text_url=classify_text(searchText, classify_pk)
-    table_url=classify_table(searchText, classify_pk)
-    return JsonResponse({'text': text_url, 'table': table_url})
+    text_url =classify_text(searchText, classify_pk)
+    table_url, table_weight, table_intercept =classify_table(searchText, classify_pk)
+    return JsonResponse({'text': text_url, 'table': table_url, 'table_weight': table_weight, 'table_intercept': table_intercept})
 
 def index(request, index_pk = 1):
     template = str(request.build_absolute_uri('?')).split('/')[-1]

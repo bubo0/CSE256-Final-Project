@@ -37088,25 +37088,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divMQMN69EJOZTM0G5"></div>
+        <div class="lime top_div" id="top_divU7FODPGQQF1KTQ8"></div>
         
         <script>
-        var top_div = d3.select('#top_divMQMN69EJOZTM0G5').classed('lime top_div', true);
+        var top_div = d3.select('#top_divU7FODPGQQF1KTQ8').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["NoTrump", "Trump"], [0.7208987030887197, 0.27910129691128027]);
+            var pp = new lime.PredictProba(pp_svg, ["NEGATIVE", "POSITIVE"], [0.0007069324737481783, 0.9992930675262518]);
             
         
         var exp_div;
-            var exp = new lime.Explanation(["NoTrump", "Trump"]);
+            var exp = new lime.Explanation(["NEGATIVE", "POSITIVE"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["Donald Trump > 0.00", 0.1434302988298362], ["I love > 0.00", -0.10104744730046976], ["Donald > 0.00", 0.05105461022589663], ["love > 0.00", -0.014584985671236231]], 0, exp_div);
+                exp.show([["good > 0.00", 0.1470533032013401], ["this is > 0.00", 0.14597770059740775], ["is > 0.03", 0.09971759068499562], ["this is good > 0.00", 0.08727994708402119], ["is good > 0.00", 0.0106832770659742], ["this > 0.03", -0.004298835318990778]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["Donald Trump", "1.00", 0.1434302988298362], ["I love", "1.00", -0.10104744730046976], ["Donald", "1.00", 0.05105461022589663], ["love", "1.00", -0.014584985671236231]], 0, raw_div);
+            exp.show_raw_tabular([["good", "0.25", 0.1470533032013401], ["this is", "0.33", 0.14597770059740775], ["is", "0.18", 0.09971759068499562], ["this is good", "0.72", 0.08727994708402119], ["is good", "0.50", 0.0106832770659742], ["this", "0.17", -0.004298835318990778]], 1, raw_div);
         
         </script>
         </body></html>

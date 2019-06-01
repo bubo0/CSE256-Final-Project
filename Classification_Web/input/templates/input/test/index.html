@@ -1093,9 +1093,24 @@
                 success: function (data) {                    
                     text_url = data['text']
                     table_url = data['table']
+                    table_weight = data['table_weight']
+                    table_intercept = data['table_intercept']
+                    table_weight.unshift('Weight')
+                    console.log(table_intercept)
                     $("#main_content").empty()
                     $('.text_result').load(text_url)
-                    $('.table_result').load(table_url)                    
+                    $('.table_result').load(table_url, function() {
+                        $('.table_div tr').each(function( index ) {
+                            $( this ).append('<td>'+table_weight[index]+'</td>')
+                        });
+                        css_val=$('.table_div tr').last().attr('style')
+                        console.log(css_val)
+                        var lastTr = $('<tr></tr>').appendTo(".table_div table");
+                        lastTr.append('<td>INTERCEPT</td>')
+                        lastTr.append('<td>'+table_intercept+'</td>')
+                        lastTr.append('<td>1</td>')
+                        console.log(lastTr.html())
+                    })                    
                     $("#main").css({ height: 'auto' });                    
                 },
                 error: function (data) {
