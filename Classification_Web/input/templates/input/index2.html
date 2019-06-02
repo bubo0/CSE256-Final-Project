@@ -114,8 +114,8 @@
                 <section id="main-content">
                     <div class='text_result'></div>
                     <div class='table_result'></div>
-                    <div class='show_trump'>
-                        
+                    <div id='show_trump'>
+                        <a id="picHrefId" href="" target="_blank"><img id="picId" src="static/blank.jpg" style="display:block;"/></a>
                     </div>
 
                     <!-- row 1 -->
@@ -471,6 +471,7 @@
 
                     // $('.show_trump').text('<img src="/static/trump1.jpg" width="20%" alt="trump">')          
                     // TODO pre set a void img in html; update the address when success
+
                 },
                 error: function (data) {
                     alert('failed')
