@@ -4541,3 +4541,10 @@ h6.h1 {
 .bootstrap-data-table-panel li{        
   padding: 5px;  
 }
+
+@media (min-width: 992px) {
+  .container-fluid .col-lg-1 {      
+      flex: 0 0 3.333333%;
+      max-width: 3.333333%;
+  }
+}
