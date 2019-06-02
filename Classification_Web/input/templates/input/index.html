@@ -503,13 +503,15 @@
                 success: function (data) {                    
                     text_url = data['text']
                     table_url = data['table']
-                    table_weight = data['table_weight']
+                    // table_weight = data['table_weight']
                     table_intercept = data['table_intercept']
-                    table_weight.unshift('Weight')           
+                    // table_weight.unshift('Weight')           
                     $('.text_result').load(text_url)
                     $('.table_result').load(table_url, function() {
                         $('.table_div tr').each(function( index ) {
-                            $( this ).append('<td>'+table_weight[index]+'</td>')
+                            key = $( this ).children().first().text()
+                            $( this ).append('<td>'+data[key]+'</td>')
+                            // $( this ).append('<td>'+table_weight[index]+'</td>')
                         });
                         $('.table_div tr:first td').each(function(index) {
                             if (index == 0)

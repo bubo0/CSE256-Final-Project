@@ -49,6 +49,7 @@ def classify_text(searchText, classify_pk):
     explainer = LimeTextExplainer(class_names=pipe.classes_, verbose=False)
     exp = explainer.explain_instance(searchText, pipe.predict_proba,
                                      num_features=10, top_labels=1)
+
     path = 'input/templates/input'
     filename = 'text'
     exp_clean_save(exp, path, filename)
@@ -81,6 +82,9 @@ def classify_table(searchText, classify_pk):
         searchTextTrans = vect.transform([searchText])
         if tfidf.get_params()['use_idf']:
             searchTextTrans = tfidf.transform(searchTextTrans)
+            
+            print("proba: ", clf.predict_proba(searchTextTrans))
+
     else:
         clf = trump_table['cls']
         train_data = trump_table['trainX']
@@ -113,8 +117,9 @@ def classify_table(searchText, classify_pk):
     path = 'input/templates/input'
     filename = 'table'
     exp_clean_save(exp, path, filename)
-    return filename, weights.tolist(), intercept
-
+    # return filename, features.tolist(), weights.tolist(), intercept
+    return filename, {features[i]: weights[i] for i in range(len(weights))}, intercept
+   
 
 def classify(request, classify_pk=1):
     global sen_model, sen_train_data, trump_text, trump_table
@@ -161,7 +166,11 @@ def classify(request, classify_pk=1):
     text_url = classify_text(searchText, classify_pk)
     table_url, table_weight, table_intercept = classify_table(
         searchText, classify_pk)
-    return JsonResponse({'text': text_url, 'table': table_url, 'table_weight': table_weight, 'table_intercept': table_intercept})
+    table_weight['Feature'] = 'Weight'
+    data = {'text': text_url, 'table': table_url, 'table_intercept': table_intercept}
+    data.update(table_weight)
+    print(data)
+    return JsonResponse(data)
 
 
 def index(request, index_pk=1):
