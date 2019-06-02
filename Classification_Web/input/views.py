@@ -122,7 +122,7 @@ def classify(request, classify_pk=1):
     global sen_examples, trump_examples, sen_examples_loaded, trump_examples_loaded
     searchText = request.GET['inputText']
     if 'fromTable' in request.GET:
-        searchText = searchText[10:]
+        searchText = searchText[:10]
         if classify_pk == 1:
             if not sen_examples_loaded:
                 loadExamples(classify_pk)
@@ -131,9 +131,10 @@ def classify(request, classify_pk=1):
             if not trump_examples_loaded:
                 loadExamples(classify_pk)
             examples = trump_examples
-        for example in examples:
-            if searchText in example:
+        for example in examples:            
+            if searchText in example:                
                 searchText = example
+                print(searchText)
                 break
     if classify_pk == 1:
         if not sen_model_loaded:
