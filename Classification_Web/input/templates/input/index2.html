@@ -32,8 +32,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
-<body>   
-
+<body class='sidebar-hide'> 
     <img class="trump_img" src="static/trump1.jpg" 
     style="display:none; width:100%; height:100%;"/>
     
@@ -419,16 +418,6 @@
     <script src="/static/templates/assets/js/lib/data-table/buttons.colVis.min.js"></script>
     <script src="/static/templates/assets/js/lib/data-table/datatables-init.js"></script>
     <script src="/static/templates/assets/js/dashboard2.js"></script>
-    <script>
-        $(window).load(function() {
-            $( ".sidebar-toggle" ).click(function(){
-                //$(window).trigger('resize');
-                window.dispatchEvent(new Event('resize'));
-            });
-            $( ".sidebar-toggle" ).click()
-        })
-    </script>
-
     <script>
         $('.model-examples').click(function(e) {
             e = e || window.event;
