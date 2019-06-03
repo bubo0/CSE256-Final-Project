@@ -5,3 +5,4 @@ text.html
 .vscode/
 env/
 .ipynb_checkpoints
+shap.html
