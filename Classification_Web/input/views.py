@@ -50,7 +50,6 @@ def classify_text(searchText, classify_pk):
     explainer = LimeTextExplainer(class_names=pipe.classes_, verbose=False)
     exp = explainer.explain_instance(searchText, pipe.predict_proba,
                                      num_features=10, top_labels=0)
-
     path = 'input/templates/input'
     filename = 'text'
     exp_clean_save(exp, path, filename)

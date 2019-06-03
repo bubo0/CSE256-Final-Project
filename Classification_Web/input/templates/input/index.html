@@ -472,8 +472,12 @@
     <script src="/static/templates/assets/js/lib/data-table/datatables-init.js"></script>
     <script src="/static/templates/assets/js/dashboard2.js"></script>
     <script>
-        $( document ).ready(function() {
-            $('.sidebar-toggle').click()
+        $(window).load(function() {
+            $( ".sidebar-toggle" ).click(function(){
+                //$(window).trigger('resize');
+                window.dispatchEvent(new Event('resize'));
+            });
+            $( ".sidebar-toggle" ).click()
         })
     </script>
     <script>
