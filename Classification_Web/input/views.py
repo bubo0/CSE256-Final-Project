@@ -49,7 +49,7 @@ def classify_text(searchText, classify_pk):
         pipe = trump_text['pipeline']
     explainer = LimeTextExplainer(class_names=pipe.classes_, verbose=False)
     exp = explainer.explain_instance(searchText, pipe.predict_proba,
-                                     num_features=10, top_labels=1)
+                                     num_features=10, top_labels=0)
 
     path = 'input/templates/input'
     filename = 'text'
@@ -116,7 +116,7 @@ def classify_table(searchText, classify_pk):
         ret = zip(p, 1-p)
         return np.array(list(ret))
     exp = explainer.explain_instance(
-        searchTextTrans, predict_proba, num_features=10, top_labels=1)
+        searchTextTrans, predict_proba, num_features=10, top_labels=0)
     path = 'input/templates/input'
     filename = 'table'
     exp_clean_save(exp, path, filename)
@@ -158,7 +158,7 @@ def classify(request, classify_pk=1):
     global sen_examples, trump_examples, sen_examples_loaded, trump_examples_loaded
     searchText = request.GET['inputText']
     if 'fromTable' in request.GET:
-        searchText = searchText[:10]
+        searchText = searchText[:-3]
         if classify_pk == 1:
             if not sen_examples_loaded:
                 loadExamples(classify_pk)
