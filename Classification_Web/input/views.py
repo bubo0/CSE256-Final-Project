@@ -121,7 +121,7 @@ def classify_table(searchText, classify_pk):
     filename = 'table'
     exp_clean_save(exp, path, filename)
     # return filename, features.tolist(), weights.tolist(), intercept
-    return filename, {features[i]: weights[i] for i in range(len(weights))}, intercept
+    return filename, {features[i]: weights[i] for i in range(len(weights))}, intercept, trump_result[0]
 
 
 def classify_shap(searchText, classify_pk):
