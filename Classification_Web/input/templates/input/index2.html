@@ -128,8 +128,7 @@
 
                     <div class='text_result'></div>
                     <div class='table_result'></div>
-
-
+                    <div class='shap_result'></div>
                     <!-- row 1 -->
                     <div class="row">
                             <div class="col-lg-3">
@@ -453,14 +452,9 @@
                 success: function (data) {                    
                     text_url = data['text']
                     table_url = data['table']
-                    // table_features = data['table_features']
-                    // table_weight = data['table_weight']
-                    // bind weight with feature
-                
+                    shap_url = data['shap']                                    
                     table_intercept = data['table_intercept']
                     table_trump_result = data['table_trump_result']
-
-                    // table_weight['Feature'] = 'Weight'           
                     $('.text_result').load(text_url)
                     $('.table_result').load(table_url, function() {
 
@@ -477,7 +471,8 @@
                         $('.table_div tr:last').after('<tr><td>INTERCEPT</td><td>1</td><td>'+table_intercept+'</td></tr>')
                         $('.table_div tr:last').attr( "style", 'color: black; font-size: 15px')
 
-                    })                    
+                    })               
+                    $('.shap_result').load(shap_url)      
                     $("#main").css({ height: 'auto' }); 
                     $('.text_result').attr( "style", 'margin-bottom: 5%')
                     $('.table_result').attr( "style", 'margin-bottom: 2%')
