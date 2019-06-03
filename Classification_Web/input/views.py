@@ -199,7 +199,7 @@ def classify(request, classify_pk=1):
         searchText, classify_pk)
     shap_url = classify_shap(searchText, classify_pk)
     table_weight['Feature'] = 'Weight'
-    data = {'text': text_url, 'table': table_url, 'table_intercept': table_intercept, 'table_trump_result' : table_trump_result}
+    data = {'text': text_url, 'table': table_url, 'shap': shap_url, 'table_intercept': table_intercept, 'table_trump_result' : table_trump_result}
     data.update(table_weight)
     print(data)
     return JsonResponse(data)
