@@ -75,6 +75,8 @@ def loadExamples(classify_pk):
 
 
 def classify_table(searchText, classify_pk):
+    trump_result = ['-1']
+
     if classify_pk == 1:
         vect = sen_model.best_estimator_.named_steps.vect
         tfidf = sen_model.best_estimator_.named_steps.tfidf
@@ -83,14 +85,14 @@ def classify_table(searchText, classify_pk):
         searchTextTrans = vect.transform([searchText])
         if tfidf.get_params()['use_idf']:
             searchTextTrans = tfidf.transform(searchTextTrans)
-            
-            print("proba: ", clf.predict_proba(searchTextTrans))
 
     else:
         clf = trump_table['cls']
         train_data = trump_table['trainX']
         vect = trump_table['vect']
         searchTextTrans = vect.transform([searchText])
+        trump_result = clf.predict(searchTextTrans)
+
     searchTextTrans = searchTextTrans.toarray()[0]
     idx = np.argwhere(searchTextTrans != 0).flatten()
     searchTextTrans = searchTextTrans[idx]
@@ -150,7 +152,6 @@ def classify_shap(searchText, classify_pk):
     # return filename, features.tolist(), weights.tolist(), intercept
     return filename
 
-
 def classify(request, classify_pk=1):
     global sen_model, sen_train_data, trump_text, trump_table
     global sen_model_loaded, sen_data_laoded, trump_table_loaded, trump_text_loaded
@@ -194,11 +195,11 @@ def classify(request, classify_pk=1):
             trump_table_loaded = True
 
     text_url = classify_text(searchText, classify_pk)
-    table_url, table_weight, table_intercept = classify_table(
+    table_url, table_weight, table_intercept, table_trump_result = classify_table(
         searchText, classify_pk)
     shap_url = classify_shap(searchText, classify_pk)
     table_weight['Feature'] = 'Weight'
-    data = {'text': text_url, 'table': table_url, 'shap': shap_url, 'table_intercept': table_intercept}
+    data = {'text': text_url, 'table': table_url, 'table_intercept': table_intercept, 'table_trump_result' : table_trump_result}
     data.update(table_weight)
     print(data)
     return JsonResponse(data)
